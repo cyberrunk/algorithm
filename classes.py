@@ -1,27 +1,27 @@
-class Food(object):
-    def __init__(self, n, v, w):
-        self.name = n
-        self.value = v
-        self.calories = w
-
-    def getvalue(self):
-        return self.value
-
-    def getcost(self):
-        return self.calories
-
-    def density(self):
-        return self.getvalue() / self.getcost()
-
-    def __str__(self):
-        return self.name + ': <' + str(self.value) + ',' + str(self.calories) + '>'
-
-
-def build_menu(names, values, calories):
-    menu = []
-    for i in range(len(values)):
-        menu.append(Food(names[i], values[i], calories[i]))
-    return menu
+# class Food(object):
+#     def __init__(self, n, v, w):
+#         self.name = n
+#         self.value = v
+#         self.calories = w
+#
+#     def getvalue(self):
+#         return self.value
+#
+#     def getcost(self):
+#         return self.calories
+#
+#     def density(self):
+#         return self.getvalue() / self.getcost()
+#
+#     def __str__(self):
+#         return self.name + ': <' + str(self.value) + ',' + str(self.calories) + '>'
+#
+#
+# def build_menu(names, values, calories):
+#     menu = []
+#     for i in range(len(values)):
+#         menu.append(Food(names[i], values[i], calories[i]))
+#     return menu
 
 
 class Node(object):
@@ -92,32 +92,3 @@ class Graph(Digraph):
         Digraph.add_edge(self, edge)
         rev = Edge(edge.get_dest, edge.get_src)
         Digraph.add_edge(self, rev)
-
-
-def depth_first_search(graph, start, end, path, shortest, to_print=False):
-    # path += [start]
-    path = path + [start]
-    if to_print:
-        print('Current DSP path: ', print_path(path))
-    if start == end:
-        return path
-    for node in graph.children_of(start):
-        if node not in path:
-            if shortest is None or len(path) < len(shortest) - 1:
-                new_path = depth_first_search(graph, node, end, path, shortest, to_print)
-                if new_path is not None:
-                    shortest = new_path
-        elif to_print:
-            print('Already visited ', node)
-    return shortest
-
-
-def shortest_path(graph, start, end, to_print=False):
-    return depth_first_search(graph, start, end, [], None, to_print)
-
-
-def print_path(nodes):
-    path = ''
-    for node in nodes:
-        path += str(node) + ' -> '
-    return path[:-3]
