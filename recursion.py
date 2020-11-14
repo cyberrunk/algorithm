@@ -21,3 +21,4 @@ def towers(n, fr, to, spare, k):
 
 def print_move(fr, to, k):
     print('move form', fr, 'to', to, k)
+
